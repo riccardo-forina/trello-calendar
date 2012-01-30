@@ -1,7 +1,7 @@
 var App = {
     model: {},
     collection: {},
-    view: {},
+    view: {}
 };
 
 /**
@@ -40,7 +40,7 @@ App.view.Card = Backbone.View.extend({
                 id: this.model.id,
                 title: this.model.get('name'),
                 start: this.model.get('badges').due,
-                color: _(this.model.get('idMembers')).include(this.options.me.id) ? 'red' : 'green',
+                color: _(this.model.get('idMembers')).include(this.options.me.id) ? 'rgba(255,50,50,0.5)' : '',
                 url: this.model.get('url')
             }, true);
         }
@@ -59,7 +59,15 @@ $(document).ready(function() {
     }
 
     var calendar = $('#calendar').fullCalendar({
-        height: $(document).height() - 50
+        height: $(document).height() - 50,
+        theme: true,
+        firstDay: 1,
+        defaultView: 'basicWeek',
+        header: {
+            left: 'title',
+            center: 'basicWeek,month',
+            right:  'today prev,next'
+        }
     });
     $(window).resize(function() {
         calendar.fullCalendar('option', 'height', $(document).height() - 50);
@@ -84,7 +92,7 @@ $(document).ready(function() {
         $input.bind('click', function(e) {
             var hidden = true;
             if ($(this).is(':checked')) {
-                hidden = false
+                hidden = false;
             }
             cards.chain().filter(function(card) {
                 return card.get('idBoard') == board.id;
@@ -108,12 +116,12 @@ $(document).ready(function() {
                     });
                 });
             });
-        }
+        };
     }
 
     function showMe(me) {
         currentUser = me;
-        Trello.get('/members/my/boards', {filter: 'open'}).done(listBoards(me));
+        Trello.get('/members/my/boards', {}).done(listBoards(me));
     }
 
     function onAuthorize() {

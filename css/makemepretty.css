@@ -1,0 +1,22 @@
+html {
+    font-family: Arial, "MS Trebuchet", sans-serif;
+    background-color: #ededed;
+}
+
+#calendar {
+    float: left;
+    width: 80%;
+    margin-right: 2%;
+}
+
+#boards {
+}
+
+#boards label {
+    display: block;
+    padding: 2px 0px 2px 0px;
+}
+
+#boards label input {
+    float: left;
+}
